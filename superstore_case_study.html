@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superstore Sales Analysis | Dana's Portfolio</title>
+    <style>
+        :root {
+            --navy: #1a365d;
+            --teal: #0d9488;
+            --light-teal: #5eead4;
+            --gray-50: #f9fafb;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--gray-800);
+            background: #fff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, #2d3748 100%);
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section h2 {
+            font-size: 1.75rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border-left: 4px solid var(--teal);
+            padding-left: 1rem;
+        }
+        
+        .section h3 {
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+        
+        .section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: var(--gray-600);
+        }
+        
+        .highlight-box {
+            background: var(--gray-50);
+            border-left: 4px solid var(--teal);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box strong {
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        .insight-card {
+            background: white;
+            border: 2px solid var(--light-teal);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
+        }
+        
+        .insight-card h4 {
+            color: var(--teal);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .insight-card p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, var(--navy) 0%, #2d3748 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .key-findings {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        
+        .key-findings ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .key-findings li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            color: var(--gray-600);
+            font-size: 1.05rem;
+        }
+        
+        .key-findings li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--teal) 0%, #0f766e 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .cta-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--teal);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .methodology {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .methodology h4 {
+            color: var(--navy);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .methodology ul {
+            margin-left: 1.5rem;
+            color: var(--gray-600);
+        }
+        
+        .methodology li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .image-placeholder {
+            background: var(--gray-50);
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--gray-600);
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Superstore Performance Analysis</h1>
+        <p class="subtitle">Uncovering operational patterns and revenue opportunities in retail sales data</p>
+        <div class="meta">
+            <div class="meta-item">📊 Tools: Python, Pandas, Matplotlib, Seaborn</div>
+            <div class="meta-item">⏱️ Scope: 4-year historical analysis</div>
+            <div class="meta-item">📈 Dataset: 9,800 orders</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Business Context Section -->
+        <div class="section">
+            <h2>Business Context</h2>
+            <p>
+                In retail operations, understanding <strong>when, where, and what</strong> customers buy is critical for inventory management, 
+                staffing decisions, and promotional timing. This analysis explores a multi-year Superstore dataset to identify actionable 
+                patterns in customer behavior and operational performance.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Core Question:</strong> What hidden patterns in our sales data can drive smarter operational and strategic decisions?
+            </div>
+
+            <p>
+                Rather than simply describing the data, this analysis focuses on <strong>translating patterns into recommendations</strong> — 
+                the kind of insights that inform quarterly planning, logistics optimization, and targeted marketing campaigns.
+            </p>
+        </div>
+
+        <!-- Dataset Overview -->
+        <div class="section">
+            <h2>Dataset Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">9,800</span>
+                    <span class="stat-label">Total Orders (2015-2018)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">16</span>
+                    <span class="stat-label">Features Analyzed</span>
+                </div>
+                <!-- <div class="stat-box">
+                    <span class="stat-number">~4 days</span>
+                    <span class="stat-label">Average Delivery Time</span>
+                </div> -->
+                <div class="stat-box">
+                    <span class="stat-number">0.01%</span>
+                    <span class="stat-label">Data Quality Issues</span>
+                </div>
+            </div>
+
+            <p>
+                The dataset covers customer orders across multiple product categories, regions, and customer segments over a 4-year period. 
+                Data quality was exceptionally high — <strong>no missing values</strong>, minimal duplicates (1 record), and logically 
+                consistent timestamps, allowing the analysis to focus on pattern discovery rather than extensive cleaning.
+            </p>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="section">
+            <h2>Key Insights</h2>
+
+            <div class="insight-card">
+                <h4>Seasonal Demand Concentration</h4>
+                <p>
+                    Order volume peaks toward year-end, with <strong>September, November, and December</strong> consistently dominating sales. 
+                    This seasonal surge likely reflects back-to-school (September) and holiday shopping (November-December) behaviors.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Inventory and staffing should ramp up in Q3-Q4 to capture 40%+ of annual demand.
+                </p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Weekday Ordering Patterns Evolve Over Time</h4>
+                <p>
+                    <strong>2015-2016:</strong> Tuesday, Saturday, and Sunday dominated order volume, with Monday/Thursday/Friday consistently underperforming.
+                </p>
+                <p>
+                    <strong>2017-2018:</strong> Monday and Friday emerged as top-performing days, while Wednesday dropped off. This shift suggests 
+                    <strong>changing customer habits</strong> — potentially driven by promotional campaigns, delivery schedule preferences, or weekend browsing habits.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Marketing campaigns should adapt to these patterns — target Monday/Friday promotions in recent years, 
+                    and investigate why Wednesday lost momentum.
+                </p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Delivery Performance is Consistent</h4>
+                <p>
+                    Average delivery time holds steady at <strong>~4 days</strong> with no negative time gaps (order-to-ship logic validated). 
+                    This consistency is a competitive strength in customer experience.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Highlight 4-day delivery as a service standard in marketing materials. Monitor for any degradation 
+                    during peak months (Sept-Dec) to maintain this reliability.
+                </p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Sales Distribution Shows Expected Skew</h4>
+                <p>
+                    Most orders cluster in the lower price range, with occasional high-value outliers. This is typical for retail — 
+                    bulk low-ticket items drive volume, while premium purchases contribute disproportionately to revenue.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Segment customers into "volume buyers" vs. "high-value buyers" for differentiated retention strategies. 
+                    Upsell/cross-sell campaigns should target the high-value segment.
+                </p>
+            </div>
+        </div>
+
+        <!-- Summary of Findings -->
+        <div class="section">
+            <h2>Strategic Takeaways</h2>
+            <div class="key-findings">
+                <ul>
+                    <li><strong>Inventory Planning:</strong> Concentrate stock replenishment in Q3-Q4 to align with 40%+ annual demand surge</li>
+                    <li><strong>Promotional Timing:</strong> Shift weekday campaigns toward Monday/Friday based on recent ordering trends</li>
+                    <li><strong>Operational Benchmarking:</strong> Maintain 4-day delivery as a competitive standard; monitor during peak seasons</li>
+                    <li><strong>Customer Segmentation:</strong> Differentiate marketing strategies for volume buyers (retention) vs. high-value customers (upsell)</li>
+                    <li><strong>Further Investigation:</strong> Analyze why Wednesday orders declined post-2016 — potential gap or opportunity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Methodology -->
+        <div class="section">
+            <h2>Analytical Approach</h2>
+            
+            <div class="methodology">
+                <h4>Data Preparation</h4>
+                <ul>
+                    <li>Validated data integrity: 0 missing values, 1 duplicate removed, logical timestamp consistency confirmed</li>
+                    <li>Engineered delivery time feature from order-to-ship dates</li>
+                    <li>Verified categorical variables for typos and business logic</li>
+                </ul>
+            </div>
+
+            <div class="methodology">
+                <h4>Analysis Techniques</h4>
+                <ul>
+                    <li><strong>Temporal Analysis:</strong> Year-over-year comparisons, monthly/weekday aggregations</li>
+                    <li><strong>Distribution Analysis:</strong> Outlier detection, skewness assessment for sales values</li>
+                    <li><strong>Categorical Profiling:</strong> Segment performance across regions, product categories, customer types</li>
+                    <li><strong>Operational Metrics:</strong> Delivery time calculations and validation</li>
+                </ul>
+            </div>
+
+            <div class="methodology">
+                <h4>Tools & Libraries</h4>
+                <ul>
+                    <li><strong>Python 3.x</strong> — Core analysis environment</li>
+                    <li><strong>Pandas</strong> — Data manipulation and aggregation</li>
+                    <li><strong>Matplotlib & Seaborn</strong> — Visualization and pattern discovery</li>
+                    <li><strong>Jupyter Notebook</strong> — Interactive exploration and documentation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- What This Demonstrates -->
+        <div class="section">
+            <h2>Skills Demonstrated</h2>
+            <p>
+                This project showcases the foundational skill set expected in business/data analyst roles:
+            </p>
+            <div class="key-findings">
+                <ul>
+                    <li><strong>Data Quality Validation:</strong> Systematic checks for completeness, consistency, and business logic</li>
+                    <li><strong>Exploratory Analysis:</strong> Moving beyond summary stats to uncover temporal patterns and behavioral shifts</li>
+                    <li><strong>Business Translation:</strong> Converting statistical findings into operational recommendations</li>
+                    <li><strong>Communication:</strong> Presenting insights in a format accessible to non-technical stakeholders</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h3>Explore the Full Analysis</h3>
+            <p style="margin-bottom: 1.5rem; opacity: 0.95;">
+                See the complete code, visualizations, and statistical details
+            </p>
+            <a href="#" class="cta-button">📓 View Jupyter Notebook on GitHub</a>
+            <a href="index.html" class="cta-button">💼 Back to Portfolio</a>
+        </div>
+
+        <!-- Footer Note -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; color: var(--gray-600); font-size: 0.9rem; border-top: 1px solid #e5e7eb;">
+            <p style="margin-top: 0.5rem;">Made with ❤️Passion❤️</p>
+        </div>
+    </div>
+</body>
+</html>
