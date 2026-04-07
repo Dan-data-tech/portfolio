@@ -28,7 +28,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, var(--navy) 0%, #2d3748 100%);
+            background: linear-gradient(135deg, var(--navy) 0%, #5eead4 100%);
             color: white;
             padding: 4rem 2rem 3rem;
             text-align: center;
@@ -265,7 +265,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Superstore Performance Analysis</h1>
+        <h1>Retail Performance Analysis</h1>
         <p class="subtitle">Uncovering operational patterns and revenue opportunities in retail sales data</p>
         <div class="meta">
             <div class="meta-item">📊 Tools: Python, Pandas, Matplotlib, Seaborn</div>
@@ -277,15 +277,17 @@
     <div class="container">
         <!-- Business Context Section -->
         <div class="section">
-            <h2>Business Context</h2>
-            <p>
-                In retail operations, understanding <strong>when, where, and what</strong> customers buy is critical for inventory management, 
-                staffing decisions, and promotional timing. This analysis explores a multi-year Superstore dataset to identify actionable 
-                patterns in customer behavior and operational performance.
+            <h2>Business Problem</h2>
+            <p> The company wants to increase revenue but lacks clear visibility into:<br>
+                
+                - Which regions drive the most value<br>
+                - When demand peaks<br>
+                - Which products contribute most to growth
+                
             </p>
             
             <div class="highlight-box">
-                <strong>Core Question:</strong> What hidden patterns in our sales data can drive smarter operational and strategic decisions?
+                <strong>Core Question:</strong> How can the company increase revenue using historical sales data?
             </div>
 
             <p>
@@ -317,7 +319,7 @@
             </div>
 
             <p>
-                The dataset covers customer orders across multiple product categories, regions, and customer segments over a 4-year period. 
+                The dataset covers customer orders across multiple product categories, sub-categories, regions, and customer segments over a 4-year period. 
                 Data quality was exceptionally high — <strong>no missing values</strong>, minimal duplicates (1 record), and logically 
                 consistent timestamps, allowing the analysis to focus on pattern discovery rather than extensive cleaning.
             </p>
@@ -345,15 +347,37 @@
                 </p>
                 <p>
                     <strong>2017-2018:</strong> Monday and Friday emerged as top-performing days, while Wednesday dropped off. This shift suggests 
-                    <strong>changing customer habits</strong> — potentially driven by promotional campaigns, delivery schedule preferences, or weekend browsing habits.
+                    <strong>changing customer habits</strong>, potentially driven by promotional campaigns, delivery schedule preferences, or weekend browsing habits.
                 </p>
                 <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
-                    <u>Actionable Impact</u>: Marketing campaigns should adapt to these patterns — target Monday/Friday promotions in recent years, 
+                    <u>Actionable Impact</u>: Marketing campaigns should adapt to these patterns, target Monday/Friday promotions in recent years, 
                     and investigate why Wednesday lost momentum.
                 </p>
             </div>
 
             <div class="insight-card">
+                <h4>Regional Sales Disparities</h4>
+                <p>
+                    The West region consistently outperforms others in order volume and revenue contribution, having the east as a runner up. This disparity may be due to 
+                    demographic factors, regional marketing efforts, or distribution center proximity.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Conduct a deeper dive into regional demographics and marketing strategies. Consider reallocating resources to boost underperforming regions or further capitalize on strong markets.
+                </p>
+            </div>  
+            
+            <div class="insight-card">
+                <h4>Product Category Performance</h4>
+                <p>
+                    Technology consistently drives higher revenue per order compared to others (e.g., Office Supplies). 
+                    This suggests a skewed sales distribution where a smaller number of high-value products contribute disproportionately to revenue.
+                </p>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
+                    <u>Actionable Impact</u>: Focus upselling and cross-selling efforts on high-value categories. Consider bundling lower-performing categories with popular items to boost overall sales.
+                </p>
+            </div>
+
+            <!-- <div class="insight-card">
                 <h4>Delivery Performance is Consistent</h4>
                 <p>
                     Average delivery time holds steady at <strong>~4 days</strong> with no negative time gaps (order-to-ship logic validated). 
@@ -363,13 +387,13 @@
                     <u>Actionable Impact</u>: Highlight 4-day delivery as a service standard in marketing materials. Monitor for any degradation 
                     during peak months (Sept-Dec) to maintain this reliability.
                 </p>
-            </div>
+            </div> -->
 
             <div class="insight-card">
-                <h4>Sales Distribution Shows Expected Skew</h4>
+                <h4>Sales Distribution Heavily Right-Skewed</h4>
                 <p>
-                    Most orders cluster in the lower price range, with occasional high-value outliers. This is typical for retail — 
-                    bulk low-ticket items drive volume, while premium purchases contribute disproportionately to revenue.
+                    Most orders cluster in the lower price range, with occasional high-value outliers. This indicates that the business is driven by a high volume of low-value transactions,
+                    with a small number of high-value orders contributing disproportionately to total revenue.
                 </p>
                 <p style="margin-top: 1rem; font-weight: 600; color: var(--navy);">
                     <u>Actionable Impact</u>: Segment customers into "volume buyers" vs. "high-value buyers" for differentiated retention strategies. 
@@ -385,9 +409,7 @@
                 <ul>
                     <li><strong>Inventory Planning:</strong> Concentrate stock replenishment in Q3-Q4 to align with 40%+ annual demand surge</li>
                     <li><strong>Promotional Timing:</strong> Shift weekday campaigns toward Monday/Friday based on recent ordering trends</li>
-                    <li><strong>Operational Benchmarking:</strong> Maintain 4-day delivery as a competitive standard; monitor during peak seasons</li>
                     <li><strong>Customer Segmentation:</strong> Differentiate marketing strategies for volume buyers (retention) vs. high-value customers (upsell)</li>
-                    <li><strong>Further Investigation:</strong> Analyze why Wednesday orders declined post-2016 — potential gap or opportunity</li>
                 </ul>
             </div>
         </div>
@@ -448,7 +470,7 @@
             <p style="margin-bottom: 1.5rem; opacity: 0.95;">
                 See the complete code, visualizations, and statistical details
             </p>
-            <a href="#" class="cta-button">📓 View Jupyter Notebook on GitHub</a>
+            <a href="https://github.com/Dan-data-tech/Retail-Analysis/blob/main/superstore_eda.ipynb" class="cta-button">📓 View Jupyter Notebook on GitHub</a>
             <a href="index.html" class="cta-button">💼 Back to Portfolio</a>
         </div>
 
